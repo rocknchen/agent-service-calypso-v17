@@ -6,8 +6,8 @@ import com.hthk.fintech.model.web.http.RequestDateTime;
  * @Author: Rock CHEN
  * @Date: 2024/1/2 17:12
  */
-public interface CASService {
+public interface CASService<C, R> {
 
-    <R, C> R process(RequestDateTime reqDateTime, C criteria);
+    R process(RequestDateTime reqDateTime, C criteria);
 
 }
