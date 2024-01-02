@@ -39,7 +39,7 @@ public class ServiceManagerImpl extends AbstractService implements ServiceManage
         Collection<? extends CASService> serviceSet = appContext.getBeansOfType(CASService.class).values();
         serviceSet.stream()
                 .forEach(t -> serviceMap.put(ServiceKeyUtils.build(t.getClass().getAnnotation(com.hthk.fintech.model.common.Service.class)), t));
-        logger.info(LOG_WRAP, "SERVICE_MAP", serviceMap);
+        logger.info(LOG_WRAP, "CAS_SERVICE_MAP", serviceMap);
     }
 
     @Override
@@ -59,9 +59,9 @@ public class ServiceManagerImpl extends AbstractService implements ServiceManage
         ActionTypeEnum action = request.getAction().getName();
         RequestEntity entity = request.getEntity();
         ServiceKey key = ServiceKeyUtils.build(action, entity);
-        logger.info(LOG_DEFAULT, "SERVICE_KEY", key);
+        logger.debug(LOG_DEFAULT, "SERVICE_KEY", key);
         CASService service = serviceMap.get(key);
-        logger.info(LOG_DEFAULT, "SERVICE", service);
+        logger.debug(LOG_DEFAULT, "SERVICE", service);
         return Optional.ofNullable(service).orElseThrow(() -> new ServiceNotSupportedException());
     }
 
